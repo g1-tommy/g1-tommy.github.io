@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--Description-->
+    
+        <meta name="description" content="Sensitive #traveloper">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="Tommy">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="[자료구조] 큐(+덱)"/>
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="꿀벌"/>
+
+    <!--Page Cover-->
+    
+        <meta property="og:image" content=""/>
+    
+
+    <!-- Title -->
+    
+    <title>[자료구조] 큐(+덱) - 꿀벌</title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/sass/main.css">
+
+
+    <!--[if lt IE 8]>
+        
+<script src="/js/ie/html5shiv.js"></script>
+
+    <![endif]-->
+
+    <!--[if lt IE 8]>
+        
+<link rel="stylesheet" href="/sass/ie8.css">
+
+    <![endif]-->
+
+    <!--[if lt IE 9]>
+        
+<link rel="stylesheet" href="/sass/ie9.css">
+
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-141737076-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+
+
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Menu -->
+        <!-- Header -->
+<header id="header">
+    <div class="inner">
+
+        <!-- Logo -->
+        <a href="/" class="logo">
+            <span class="symbol"><img src="/images/logo.png" alt="" /></span><span class="title">꿀벌</span>
+        </a>
+
+        <!-- Nav -->
+        <nav>
+            <ul>
+                <li><a href="#menu">Menu</a></li>
+            </ul>
+        </nav>
+
+    </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+    <h2>Menu</h2>
+    <ul>
+        
+            <li>
+                <a href="/">Home</a>
+            </li>
+        
+            <li>
+                <a href="/archives">Archives</a>
+            </li>
+        
+            <li>
+                <a href="/about.html">About</a>
+            </li>
+        
+    </ul>
+</nav>
+
+
+        <div id="main">
+            <div class="inner">
+
+                <!-- Main Content -->
+                
+
+    <h1>[자료구조] 큐(+덱)</h1>
+
+
+
+<!-- Gallery -->
+
+
+<!-- Content -->
+<p><img src="/images/Linear_Queue.png" alt="Queue"></p>
+<h2 id="개요"><a href="#개요" class="headerlink" title="개요"></a>개요</h2><p>FIFO(First-in First-Out) 형태의 자료구조<br>스택과는 다르게 데이터 삽입과 삭제가 일어나는 곳이 별개<br>삽입단은 <code>rear</code>, 삭제단은 <code>front</code>로 구분</p>
+<h2 id="Time-Complexity"><a href="#Time-Complexity" class="headerlink" title="Time Complexity"></a>Time Complexity</h2><ul>
+<li>Insertion<ul>
+<li><code>O(1)</code></li>
+</ul>
+</li>
+<li>Deletion<ul>
+<li><code>O(1)</code></li>
+</ul>
+</li>
+<li>Search<ul>
+<li><code>O(n)</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="주요-연산"><a href="#주요-연산" class="headerlink" title="주요 연산"></a>주요 연산</h2><ul>
+<li><code>isEmpty(Queue q)</code> : 큐의 empty 여부</li>
+<li><code>isFull(Queue q)</code> : 큐의 full 여부</li>
+<li><code>enqueue(Queue q)</code> : 큐의 rear에 삽입</li>
+<li><code>dequeue(Queue q)</code> : 큐의 front 반환 및 삭제</li>
+<li><code>peek(Queue q)</code> : 큐 element 삭제 없이 반환</li>
+</ul>
+<h2 id="배열로-구현한-큐"><a href="#배열로-구현한-큐" class="headerlink" title="배열로 구현한 큐"></a>배열로 구현한 큐</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_QUEUE_SIZE 1024</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> <span class="built_in">queue</span>[MAX_QUEUE_SIZE];</span><br><span class="line"><span class="keyword">int</span> front, rear;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    front = rear = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">enqueue</span><span class="params">(<span class="keyword">int</span> item)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> ((rear + <span class="number">1</span>) % MAX_QUEUE_SIZE == front) &#123;</span><br><span class="line">        pritnf(<span class="string">"Overflow\n"</span>);</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">queue</span>[rear] = item;</span><br><span class="line">    rear = ++rear % MAX_QUEUE_SIZE;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dequeue</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> retn;</span><br><span class="line">    <span class="keyword">if</span> (front == rear) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Underflow\n"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    retn = <span class="built_in">queue</span>[front];</span><br><span class="line">    front = ++front % MAX_QUEUE_SIZE;</span><br><span class="line">    <span class="keyword">return</span> retn;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="LinkedList로-구현한-큐"><a href="#LinkedList로-구현한-큐" class="headerlink" title="LinkedList로 구현한 큐"></a>LinkedList로 구현한 큐</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TRUE  1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FALSE 0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> element;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">QueueNode</span> &#123;</span></span><br><span class="line">    element item;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">QueueNode</span> *<span class="title">link</span>;</span></span><br><span class="line">&#125; QueueNode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    QueueNode *front, *rear;</span><br><span class="line">&#125; QueueType;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(QueueType *q)</span> </span>&#123;</span><br><span class="line">    q-&gt;front = q-&gt;rear = <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">isEmpty</span><span class="params">(QueueType *q)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (q-&gt;front == <span class="literal">NULL</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">isFull</span><span class="params">(QueueType *q)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> FALSE;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">enqueue</span><span class="params">(QueueType *q, element item)</span> </span>&#123;</span><br><span class="line">    QueueNode *temp = (QueueNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(QueueNode));</span><br><span class="line">    <span class="keyword">if</span> (temp == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Error\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        temp-&gt;item = item;</span><br><span class="line">        temp-&gt;link = <span class="literal">NULL</span>;</span><br><span class="line">        <span class="keyword">if</span> (isEmpty(q)) &#123;</span><br><span class="line">            q-&gt;front = temp;</span><br><span class="line">            q-&gt;rear = temp;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            q-&gt;rear-&gt;link = temp;</span><br><span class="line">            q-&gt;rear = temp;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">element <span class="title">dequeue</span><span class="params">(QueueType *q)</span> </span>&#123;</span><br><span class="line">    QueueNode *temp = q-&gt;front;</span><br><span class="line">    element item;</span><br><span class="line">    <span class="keyword">if</span> (isEmpty(q)) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Empty\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        item = temp-&gt;item;</span><br><span class="line">        q-&gt;front = q-&gt;front-&gt;link;</span><br><span class="line">        <span class="keyword">if</span> (q-&gt;front == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            q-&gt;rear = <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">free</span>(temp);</span><br><span class="line">        <span class="keyword">return</span> item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">element <span class="title">peek</span><span class="params">(QueueType *q)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (isEmpty(q)) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Empty\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> q-&gt;front-&gt;item;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="덱-Deque"><a href="#덱-Deque" class="headerlink" title="덱(Deque)"></a>덱(Deque)</h2><p><code>Double Ended Queue</code>의 줄임말로 <code>front</code>, <code>rear</code>에서 삽입/삭제 모두 가능한 큐</p>
+<h3 id="덱의-주요-연산"><a href="#덱의-주요-연산" class="headerlink" title="덱의 주요 연산"></a>덱의 주요 연산</h3><ul>
+<li><code>isEmpty(Deque d)</code> : 덱의 empty 여부</li>
+<li><code>isFull(Deque d)</code> : 덱의 full 여부</li>
+<li><code>addFront(Deque d, element e)</code> : 큐의 front에 삽입</li>
+<li><code>addRear(Deque d, element e)</code> : 큐의 rear에 삽입</li>
+<li><code>deleteFront(Deque d)</code> : 큐의 front에서 삭제</li>
+<li><code>deleteRear(Deque d)</code> : 큐의 rear에서 삭제</li>
+<li><code>getFront(Deque d)</code> : 큐의 front에서 peek</li>
+<li><code>getRear(Deque d)</code> : 큐의 rear에서 peek</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> TRUE 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> FALSE 0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> element;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">DlistNode</span> &#123;</span></span><br><span class="line">    element data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">DlistNode</span> *<span class="title">llink</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">DlistNode</span> *<span class="title">rlink</span>;</span></span><br><span class="line">&#125; DlistNode;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">DequeType</span> &#123;</span></span><br><span class="line">    DlistNode *head;</span><br><span class="line">    DlistNode *tail;</span><br><span class="line">&#125; DequeType;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(DequeType *dq)</span> </span>&#123;</span><br><span class="line">    dq-&gt;head = dq-&gt;tail = <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">DlistNode *<span class="title">createNode</span><span class="params">(DlistNode *llink, element item, DlistNode *rlink)</span> </span>&#123;</span><br><span class="line">    DlistNode *node = (DlistNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(DlistNode));</span><br><span class="line">    <span class="keyword">if</span> (node == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Error\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125; </span><br><span class="line">    node-&gt;llink = llink;</span><br><span class="line">    node-&gt;data = item;</span><br><span class="line">    node-&gt;rlink = rlink;</span><br><span class="line">    <span class="keyword">return</span> node;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">isEmpty</span><span class="params">(DequeType *dq)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (dq-&gt;head == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> TRUE;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">return</span> FALSE;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addRear</span><span class="params">(DequeType *dq, element item)</span> </span>&#123;</span><br><span class="line">    DlistNode *newNode = createNode(dq-&gt;tail, item, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span> (isEmpty(dq)) &#123;</span><br><span class="line">        dq-&gt;head = newNode;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        dq-&gt;tail-&gt;rlink = newNode;</span><br><span class="line">    &#125;</span><br><span class="line">    dq-&gt;tail = newNode;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addFront</span><span class="params">(DequeType *dq, element item)</span> </span>&#123;</span><br><span class="line">    DlistNode *newNode = createNode(<span class="literal">NULL</span>, item, dq-&gt;head);</span><br><span class="line">    <span class="keyword">if</span> (isEmpty(dq)) &#123;</span><br><span class="line">        dq-&gt;tail = newNode;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        dq-&gt;head-&gt;llink = newNode;</span><br><span class="line">    &#125;</span><br><span class="line">    dq-&gt;head = newNode;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">deleteRear</span><span class="params">(DequeType *dq)</span> </span>&#123;</span><br><span class="line">    element item;</span><br><span class="line">    DlistNode *removedNode;</span><br><span class="line">    <span class="keyword">if</span> (isEmpty(dq)) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Empty\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        removedNode = dq-&gt;tail;</span><br><span class="line">        item = removedNode-&gt;data;</span><br><span class="line">        dq-&gt;tail = dq-&gt;tail-&gt;llink;</span><br><span class="line">        <span class="built_in">free</span>(removedNode);</span><br><span class="line">        <span class="keyword">if</span> (dq-&gt;tail == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            dq-&gt;head = <span class="literal">NULL</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            dq-&gt;tail-&gt;rlink = <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> item;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">deleteFront</span><span class="params">(DequeType *dq)</span> </span>&#123;</span><br><span class="line">    element item;</span><br><span class="line">    DlistNode *removedNode;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (isEmpty(dq)) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Empty\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        removedNode = dq-&gt;head;</span><br><span class="line">        item = removedNode-&gt;data;</span><br><span class="line">        dq-&gt;tail = dq-&gt;head-&gt;rlink;</span><br><span class="line">        <span class="built_in">free</span>(removedNode);</span><br><span class="line">        <span class="keyword">if</span> (dq-&gt;head == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            dq-&gt;tail = <span class="literal">NULL</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            dq-&gt;head-&gt;llink = <span class="literal">NULL</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> item;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="원형-큐-Circular-Queue"><a href="#원형-큐-Circular-Queue" class="headerlink" title="원형 큐 (Circular Queue)"></a>원형 큐 (Circular Queue)</h2><blockquote>
+<p>큐의 front, rear가 연결된 형태</p>
+</blockquote>
+<p><img src="/images/Circular_Queue.png" alt="Circular Queue"></p>
+<p>front, rear 값이 <code>MAX_QUEUE_SIZE - 1</code>에 도달하면 다음 값은 0이 되도록 설정</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_QUEUE_SIZE 1024</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> element;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    element <span class="built_in">queue</span>[MAX_QUEUE_SIZE];</span><br><span class="line">    <span class="keyword">int</span> front, rear;</span><br><span class="line">&#125; QueueType;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(QueueType *q)</span> </span>&#123;</span><br><span class="line">    q-&gt;front = q-&gt;rear = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">isEmpty</span><span class="params">(QueueType *q)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (q-&gt;front == q-&gt;rear);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">isFull</span><span class="params">(QueueType *q)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ((q-&gt;rear + <span class="number">1</span>) % MAX_QUEUE_SIZE == q-&gt;front);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">enqueue</span><span class="params">(QueueType *q, element item)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (isFull(q)) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Full\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    q-&gt;rear = (q-&gt;rear + <span class="number">1</span>) % MAX_QUEUE_SIZE;</span><br><span class="line">    q-&gt;<span class="built_in">queue</span>[q-&gt;rear] = item;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">element <span class="title">dequeue</span><span class="params">(QueueType *q)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (isEmpty(q)) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Empty\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    q-&gt;front = (q-&gt;front + <span class="number">1</span>) % MAX_QUEUE_SIZE;</span><br><span class="line">    <span class="keyword">return</span> q-&gt;<span class="built_in">queue</span>[q-&gt;front];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">element <span class="title">peek</span><span class="params">(QueueType *q)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (isEmpty(q)) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Empty\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> q-&gt;<span class="built_in">queue</span>[(q-&gt;front + <span class="number">1</span>) % MAX_QUEUE_SIZE];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="큐의-응용"><a href="#큐의-응용" class="headerlink" title="큐의 응용"></a>큐의 응용</h2><ul>
+<li><code>버퍼</code>: 향후 포스트 예정</li>
+<li><code>시뮬레이션</code> : 향후 포스트 예정</li>
+</ul>
+
+
+<!-- Tags -->
+
+
+
+<div class="tags">
+    <a href="/tags/자료구조/" class="button small">자료구조</a> <a href="/tags/큐/" class="button small">큐</a> <a href="/tags/덱/" class="button small">덱</a>
+</div>
+
+
+
+<!-- Comments -->
+<div>
+    
+    <hr />
+    <h3>Comments:</h3>
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" target="_blank" rel="noopener">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+
+</div>
+
+
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+<footer id="footer">
+    <div class="inner">
+        <section>
+            <h2>About</h2>
+            <div>
+                열심히 꿀 빨기 위해 노력중입니다. <a href="http://g1tommy.me/resume">꿀 빨기 위한 노력 확인하기</a>
+            </div>
+        </section>
+        <section>
+            <h2>Follow</h2>
+            <ul class="icons">
+                
+                
+                
+                    <li><a href="https://www.instagram.com/g1_tommy" class="icon style2 fa-instagram" target="_blank" ><span class="label">Instagram</span></a></li>
+                
+                
+                
+                    <li><a href="https://github.com/g1-tommy" class="icon style2 fa-github" target="_blank" ><span class="label">GitHub</span></a></li>
+                
+                
+                
+                
+                
+                    <li><a href="mailto:g1.jeon@kakao.com" class="icon style2 fa-envelope-o" target="_blank" ><span class="label">Email</span></a></li>
+                
+                
+            </ul>
+        </section>
+        <ul class="copyright">
+            <li>&copy; G1. All rights reserved</li>
+            <li>Design: <a href="http://html5up.net" target="_blank">HTML5 UP</a></li>
+        </ul>
+    </div>
+</footer>
+    </div>
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- skel -->
+
+<script src="/js/skel.min.js"></script>
+
+
+<!-- Custom Code -->
+
+<script src="/js/util.js"></script>
+
+
+<!--[if lte IE 8]>
+
+<script src="/js/ie/respond.min.js"></script>
+
+<![endif]-->
+
+<!-- Custom Code -->
+
+<script src="/js/main.js"></script>
+
+
+<!-- Gallery -->
+<script src="//cdn.rawgit.com/noelboss/featherlight/1.3.5/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+<script type="text/javascript">
+    var disqus_shortname = 'g1-tommy';
+
+    (function(){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+</body>
+
+</html>
